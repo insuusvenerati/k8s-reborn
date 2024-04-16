@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: "https://github.com/insuusvenerati/k8s-reborn"
+  url: "https://github.com/insuusvenerati/k8s-rebornhttps://github.com/insuusvenerati/k8s-reborn"
   secretRef:
     name: github-deploy-key
   ref:

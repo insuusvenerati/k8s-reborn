@@ -14,3 +14,5 @@ resources:
   - ./spegel.yaml
   - ./stakater.yaml
   - ./nfs-subdir-external.yaml
+  - ./k8s-at-home.yaml
+  - ./hajimari.yaml

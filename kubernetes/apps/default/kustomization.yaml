@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  #- ./echo-server/ks.yaml
+  - ./hajimari/ks.yaml
+  - ./pvc-ssd.yaml
+  - ./sonarr
+  - ./radarr
+  - ./overseerr
+  - ./jackett
+  #- ./tubearchivist
+  # - ./ha-ingress
+  #- ./bazarr
+  # - ./plane-ingress
+  # - ./lidarr-ingress
+  # - ./filebrowser-ingress
+  # - ./plex-ingress
+  # - ./tautulli-ingress
+  # - ./ptero-ingress

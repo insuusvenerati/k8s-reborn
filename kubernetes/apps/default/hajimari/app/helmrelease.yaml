@@ -1,0 +1,117 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hajimari
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: hajimari
+      version: 2.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: hajimari
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    hajimari:
+      title: Apps
+      darkTheme: horizon
+      alwaysTargetBlank: true
+      showGreeting: false
+      showAppGroups: true
+      showAppStatus: true
+      showBookmarkGroups: true
+      showGlobalBookmarks: true
+      showAppUrls: true
+      defaultEnable: true
+      namespaceSelector:
+        matchNames:
+          - default
+          - monitoring
+          - kube-system
+      globalBookmarks:
+        - group: Work
+          bookmarks:
+            - name: Cal.com
+              url: https://cal.com
+              icon: mdi:calendar
+        - group: Media
+          bookmarks:
+            - name: Lidarr
+              url: http://192.168.1.168:8686/
+              icon: mdi:music
+        - group: Default
+          bookmarks:
+            - name: Reddit
+              url: https://reddit.com
+              icon: mdi:reddit
+            - name: YouTube
+              url: https://youtube.com
+              icon: mdi:youtube
+            - name: Github
+              url: https://github.com
+              icon: mdi:github
+        - group: Seedbox
+          bookmarks:
+            - name: Client Area
+              url: https://members.rapidseedbox.com/clientarea.php
+              icon: mdi:account
+            - name: Dashboard
+              url: https://dashboard-103-139-49-223.a.seedbox.vip/
+              icon: mdi:monitor-dashboard
+            - name: QBittorrent
+              url: https://dashboard-103-139-49-223.a.seedbox.vip/qbittorrent-user/
+              icon: mdi:download
+            - name: Syncthing
+              url: https://dashboard-103-139-49-223.a.seedbox.vip/syncthing/
+              icon: mdi:sync
+        - group: Homelab
+          bookmarks:
+            - name: Opnsense
+              url: https://opnsense.stiforr.com:8080/
+              icon: mdi:router-wireless
+            - name: Proxmix
+              url: https://proxmox.stiforr.com:8006/
+              icon: mdi:server
+            - name: Home Assistant
+              url: http://192.168.1.136:8123/
+              icon: mdi:home-assistant
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          nginx.ingress.kubernetes.io/whitelist-source-range: |
+            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+          hajimari.io/enable: "false"
+        hosts:
+          - host: &host "hajimari.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: hajimari-settings
+    persistence:
+      data:
+        enabled: true
+        type: emptyDir
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128M

@@ -39,7 +39,7 @@ spec:
       config:
         enabled: true
         mountPath: /app/config
-        storageClass: nfs-client-ssd
+        storageClass: openebs-hostpath
         size: 10Gi
     ingress:
       main:

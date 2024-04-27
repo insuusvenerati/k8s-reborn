@@ -43,4 +43,4 @@ spec:
       config:
         enabled: true
         mountPath: /config
-        storageClass: nfs-client-ssd
+        storageClass: openebs-hostpath

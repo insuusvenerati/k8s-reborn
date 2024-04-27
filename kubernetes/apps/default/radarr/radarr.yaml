@@ -54,11 +54,11 @@ spec:
     persistence:
       config:
         enabled: true
-        storageClass: nfs-client-ssd
+        storageClass: openebs-hostpath
       vids:
         enabled: true
         mountPath: /data
-        storageClass: nfs-client-ssd
+        storageClass: openebs-hostpath
         accessMode: ReadWriteMany
         existingClaim: media-pvc-ssd
         size: 250Gi

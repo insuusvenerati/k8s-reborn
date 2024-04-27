@@ -12,7 +12,7 @@ spec:
     - ReadWriteOnce
     - ReadOnlyMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-client-ssd
+  storageClassName: openebs-hostpath
   mountOptions:
     - nolock
     - nfsvers=4.1
@@ -38,4 +38,4 @@ spec:
       storage: 500Gi
   accessModes:
     - ReadWriteMany
-  storageClassName: nfs-client-ssd
+  storageClassName: openebs-hostpath

@@ -18,5 +18,5 @@ resources:
   # - ./plex-ingress
   # - ./tautulli-ingress
   # - ./ptero-ingress
-
+  - ./qbittorrent
   - ./nfs-subdir-external-ssd

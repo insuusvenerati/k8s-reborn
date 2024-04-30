@@ -1,0 +1,115 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: app-template
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+      version: 3.1.0
+  interval: 1h0m0s
+  releaseName: qbittorrent
+  targetNamespace: default
+  values:
+    defaultPodOptions:
+      automountServiceAccountToken: false
+
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/onedr0p/qbittorrent
+              tag: 4.6.0
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+
+          gluetun:
+            dependsOn: main
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: latest
+            # See [image docs](https://github.com/qdm12/gluetun-wiki) for more details on how to configure
+            # your VPN and how to set up port-forwarding.
+            env:
+              VPN_TYPE: wireguard
+              VPN_INTERFACE: wg0
+              VPN_SERVICE_PROVIDER: mullvad
+              WIREGUARD_PRIVATE_KEY:
+                secretKeyRef:
+                  name: qbittorrent-wireguard-private-key
+                  key: wireguardPrivateKey
+              SERVER_CITIES: "Ashburn"
+              WIREGUARD_ADDRESSES: 10.70.239.131/32
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
+
+          port-forward:
+            dependsOn: gluetun
+            image:
+              repository: docker.io/snoringdragon/gluetun-qbittorrent-port-manager
+              tag: "1.0"
+            env:
+              - name: QBITTORRENT_SERVER
+                value: localhost
+              - name: QBITTORRENT_PORT
+                value: "8080"
+              - name: PORT_FORWARDED
+                value: "/tmp/gluetun/forwarded_port"
+
+    service:
+      main:
+        controller: main
+        type: ClusterIP
+        ports:
+          http:
+            port: 8080
+
+    ingress:
+      main:
+        className: "internal"
+        hosts:
+          - host: &host qbittorrent.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      config:
+        existingClaim: qbittorrent-config
+        advancedMounts:
+          main:
+            main:
+              - path: /config
+      gluetun-data:
+        type: emptyDir
+        advancedMounts:
+          main:
+            gluetun:
+              - path: /tmp/gluetun
+            port-forward:
+              - path: /tmp/gluetun
+                readOnly: true

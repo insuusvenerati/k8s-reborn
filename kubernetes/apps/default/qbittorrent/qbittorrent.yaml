@@ -99,7 +99,7 @@ spec:
 
     persistence:
       config:
-        existingClaim: qbittorrent-config
+        type: persistentVolumeClaim
         advancedMounts:
           main:
             main:

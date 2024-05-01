@@ -91,7 +91,7 @@ spec:
 
     ingress:
       main:
-        className: "internal"
+        className: internal
         hosts:
           - host: &host qbittorrent.${SECRET_DOMAIN}
             paths:

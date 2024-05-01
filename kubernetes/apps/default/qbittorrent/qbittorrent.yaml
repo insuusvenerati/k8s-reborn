@@ -98,21 +98,21 @@ spec:
           - hosts:
               - *host
 
-      persistence:
-        # Configure the main configuration storage location
-        config:
-          type: persistentVolumeClaim
-          storageClass: openebs-hostpath
-          advancedMounts:
-            main:
-              main:
-                - path: /config
-      gluetun-data:
-        type: emptyDir
+    persistence:
+      # Configure the main configuration storage location
+      config:
+        type: persistentVolumeClaim
+        storageClass: openebs-hostpath
         advancedMounts:
           main:
-            gluetun:
-              - path: /tmp/gluetun
-            port-forward:
-              - path: /tmp/gluetun
-                readOnly: true
+            main:
+              - path: /config
+    gluetun-data:
+      type: emptyDir
+      advancedMounts:
+        main:
+          gluetun:
+            - path: /tmp/gluetun
+          port-forward:
+            - path: /tmp/gluetun
+              readOnly: true

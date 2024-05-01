@@ -103,6 +103,8 @@ spec:
       config:
         type: persistentVolumeClaim
         storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        size: 1Gi
         advancedMounts:
           main:
             main:

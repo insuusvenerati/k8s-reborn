@@ -40,27 +40,27 @@ spec:
               runAsUser: 568
               runAsGroup: 568
 
-          gluetun:
-            dependsOn: main
-            image:
-              repository: ghcr.io/qdm12/gluetun
-              tag: latest
-            # See [image docs](https://github.com/qdm12/gluetun-wiki) for more details on how to configure
-            # your VPN and how to set up port-forwarding.
-            env:
-              VPN_TYPE: wireguard
-              VPN_INTERFACE: wg0
-              VPN_SERVICE_PROVIDER: mullvad
-              WIREGUARD_PRIVATE_KEY:
-                secretKeyRef:
-                  name: qbittorrent-wireguard-private-key
-                  key: wireguardPrivateKey
-              SERVER_CITIES: "Ashburn VA"
-              WIREGUARD_ADDRESSES: 10.70.239.131/32
-            securityContext:
-              capabilities:
-                add:
-                  - NET_ADMIN
+          # gluetun:
+          #   dependsOn: main
+          #   image:
+          #     repository: ghcr.io/qdm12/gluetun
+          #     tag: latest
+          #   # See [image docs](https://github.com/qdm12/gluetun-wiki) for more details on how to configure
+          #   # your VPN and how to set up port-forwarding.
+          #   env:
+          #     VPN_TYPE: wireguard
+          #     VPN_INTERFACE: wg0
+          #     VPN_SERVICE_PROVIDER: mullvad
+          #     WIREGUARD_PRIVATE_KEY:
+          #       secretKeyRef:
+          #         name: qbittorrent-wireguard-private-key
+          #         key: wireguardPrivateKey
+          #     SERVER_CITIES: "Ashburn VA"
+          #     WIREGUARD_ADDRESSES: 10.70.239.131/32
+          #   securityContext:
+          #     capabilities:
+          #       add:
+          #         - NET_ADMIN
 
           # port-forward:
           #   dependsOn: gluetun

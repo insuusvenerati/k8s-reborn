@@ -55,7 +55,7 @@ spec:
                 secretKeyRef:
                   name: qbittorrent-wireguard-private-key
                   key: wireguardPrivateKey
-              SERVER_CITIES: "Ashburn, VA"
+              SERVER_CITIES: "Ashburn VA"
               WIREGUARD_ADDRESSES: 10.70.239.131/32
             securityContext:
               capabilities:

@@ -49,7 +49,7 @@ spec:
             # your VPN and how to set up port-forwarding.
             env:
               VPN_TYPE: wireguard
-              VPN_INTERFACE: eth0
+              VPN_INTERFACE: wg0
               VPN_SERVICE_PROVIDER: mullvad
               DNS_KEEP_NAMESERVER: "on"
               WIREGUARD_PRIVATE_KEY:

@@ -61,7 +61,7 @@ spec:
               #   secretKeyRef:
               #     name: qbittorrent-openvpn-credentials
               #     key: openvpnUser
-              WIREGUARD_ADDRESSES: 10.70.239.131/32
+              WIREGUARD_ADDRESSES: 10.71.1.130/32
             securityContext:
               capabilities:
                 add:

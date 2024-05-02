@@ -32,7 +32,7 @@ spec:
             fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
-          qbittorrent:
+          main:
             image:
               repository: ghcr.io/onedr0p/qbittorrent-beta
               tag: 4.6.4@sha256:d7620ef51467015e1cffab143d053a7dfbc2d7a6f50b3491427df7cd40cf16a9
@@ -41,7 +41,7 @@ spec:
               runAsGroup: 568
 
           gluetun:
-            dependsOn: qbittorrent
+            dependsOn: main
             image:
               repository: qmcgaw/gluetun
               tag: v3.38.0

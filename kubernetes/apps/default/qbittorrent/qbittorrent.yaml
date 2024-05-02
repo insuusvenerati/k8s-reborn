@@ -59,6 +59,7 @@ spec:
               SERVER_CITIES: "Ashburn VA"
               WIREGUARD_ADDRESSES: 10.71.1.130/32
               WIREGUARD_ALLOWED_IPS: 0.0.0.0/0
+              FIREWALL_VPN_INPUT_PORTS: "8080"
             securityContext:
               capabilities:
                 add:

@@ -32,7 +32,7 @@ spec:
             fsGroupChangePolicy: "OnRootMismatch"
 
         containers:
-          main:
+          qbittorrent:
             image:
               repository: ghcr.io/onedr0p/qbittorrent-beta
               tag: 4.6.4@sha256:d7620ef51467015e1cffab143d053a7dfbc2d7a6f50b3491427df7cd40cf16a9
@@ -41,7 +41,7 @@ spec:
               runAsGroup: 568
 
           gluetun:
-            # dependsOn: main
+            dependsOn: main
             image:
               repository: qmcgaw/gluetun
               tag: v3.38.0
@@ -57,11 +57,8 @@ spec:
                   name: qbittorrent-wireguard-private-key
                   key: wireguardPrivateKey
               SERVER_CITIES: "Ashburn VA"
-              # OPENVPN_USER:
-              #   secretKeyRef:
-              #     name: qbittorrent-openvpn-credentials
-              #     key: openvpnUser
               WIREGUARD_ADDRESSES: 10.71.1.130/32
+              WIREGUARD_ALLOWED_IPS: 0.0.0.0/0
             securityContext:
               capabilities:
                 add:

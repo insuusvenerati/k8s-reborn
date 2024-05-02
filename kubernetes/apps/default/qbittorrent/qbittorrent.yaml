@@ -41,7 +41,7 @@ spec:
               runAsGroup: 568
 
           gluetun:
-            dependsOn: main
+            dependsOn: qbittorrent
             image:
               repository: qmcgaw/gluetun
               tag: v3.38.0

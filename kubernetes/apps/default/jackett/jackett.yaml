@@ -17,8 +17,8 @@ spec:
   interval: 15m
   values:
     image:
-      repository: lscr.io/linuxserver/jackett
-      tag: 0.21.1155
+      repository: linuxserver/jackett
+      tag: 0.21.2526
     env:
       TZ: America/Chicago
     ingress:

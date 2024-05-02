@@ -51,14 +51,14 @@ spec:
               VPN_TYPE: wireguard
               VPN_INTERFACE: wg0
               VPN_SERVICE_PROVIDER: mullvad
-              DNS_KEEP_NAMESERVER: "on"
+              # DNS_KEEP_NAMESERVER: "on"
               WIREGUARD_PRIVATE_KEY:
                 secretKeyRef:
                   name: qbittorrent-wireguard-private-key
                   key: wireguardPrivateKey
               SERVER_CITIES: "Ashburn VA"
               WIREGUARD_ADDRESSES: 10.71.1.130/32
-              WIREGUARD_ALLOWED_IPS: 0.0.0.0/0
+              # WIREGUARD_ALLOWED_IPS: 0.0.0.0/0
               FIREWALL_VPN_INPUT_PORTS: "8080"
             securityContext:
               capabilities:

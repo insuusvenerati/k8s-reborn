@@ -41,7 +41,7 @@ spec:
               runAsGroup: 568
 
           gluetun:
-            dependsOn: main
+            # dependsOn: main
             image:
               repository: qmcgaw/gluetun
               tag: v3.38.0
@@ -49,7 +49,7 @@ spec:
             # your VPN and how to set up port-forwarding.
             env:
               VPN_TYPE: openvpn
-              # VPN_INTERFACE: wg0
+              VPN_INTERFACE: wg0
               VPN_SERVICE_PROVIDER: mullvad
               # WIREGUARD_PRIVATE_KEY:
               #   secretKeyRef:

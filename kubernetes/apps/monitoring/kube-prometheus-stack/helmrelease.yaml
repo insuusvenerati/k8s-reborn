@@ -28,3 +28,6 @@ spec:
           - secretName: grafana-tls
             hosts:
               - grafana.${SECRET_DOMAIN}
+    prometheus:
+      prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false

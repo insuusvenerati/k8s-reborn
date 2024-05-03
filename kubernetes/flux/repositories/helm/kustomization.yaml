@@ -16,3 +16,4 @@ resources:
   - ./k8s-at-home.yaml
   - ./hajimari.yaml
   - ./bjw-s.yaml
+  - ./prometheus-community.yaml

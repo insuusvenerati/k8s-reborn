@@ -17,3 +17,4 @@ resources:
   - ./hajimari.yaml
   - ./bjw-s.yaml
   - ./prometheus-community.yaml
+  - ./grafana.yaml

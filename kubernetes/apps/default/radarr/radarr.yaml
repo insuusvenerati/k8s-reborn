@@ -29,7 +29,7 @@ spec:
     image:
       repository: linuxserver/radarr
       pullPolicy: IfNotPresent
-      tag: nightly-version-5.5.2.8766
+      tag: nightly-version-5.7.0.8851
     ingress:
       main:
         enabled: true

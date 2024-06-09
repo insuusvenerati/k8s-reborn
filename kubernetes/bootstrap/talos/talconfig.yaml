@@ -6,20 +6,20 @@ talosVersion: v1.6.7
 kubernetesVersion: v1.29.3
 
 clusterName: &cluster home-kubernetes
-endpoint: https://192.168.1.210:6443
+endpoint: https://192.168.1.201:6443
 clusterPodNets:
   - "10.69.0.0/16"
 clusterSvcNets:
   - "10.96.0.0/16"
 additionalApiServerCertSans: &sans
-  - "192.168.1.210"
+  - "192.168.1.201"
   - 127.0.0.1 # KubePrism
 additionalMachineCertSans: *sans
 cniConfig:
   name: none
 
 nodes:
-  - hostname: "control"
+  - hostname: "k8s"
     ipAddress: "192.168.1.150"
     installDisk: "/dev/sda"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
@@ -35,7 +35,7 @@ nodes:
           - network: 0.0.0.0/0
             gateway: "192.168.1.254"
         vip:
-          ip: "192.168.1.210"
+          ip: "192.168.1.201"
 
 patches:
   # Configure containerd
@@ -83,7 +83,6 @@ patches:
     machine:
       network:
         nameservers:
-          - 192.168.1.164
 
   # Configure NTP
   - |-

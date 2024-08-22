@@ -16,3 +16,4 @@ resources:
   - ./k8s-at-home.yaml
   - ./nfs-subdir-external.yaml
   - ./hajimari.yaml
+  - ./prometheus-community.yaml

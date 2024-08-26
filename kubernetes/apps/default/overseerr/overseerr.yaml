@@ -51,7 +51,7 @@ spec:
           hajimari.io/group: Media
           hajimari.io/icon: mdi:movie
         hosts:
-          - host: &host overseerr.${SECRET_DOMAIN}
+          - host: &host overseerr.internal.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix

@@ -31,7 +31,7 @@ spec:
           hajimari.io/group: Media
           hajimari.io/icon: mdi:rss
         hosts:
-          - host: &host jackett.${SECRET_DOMAIN}
+          - host: &host jackett.internal.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix

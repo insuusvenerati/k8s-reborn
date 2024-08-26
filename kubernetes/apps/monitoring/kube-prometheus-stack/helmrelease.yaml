@@ -23,11 +23,11 @@ spec:
         enabled: true
         ingressClassName: internal
         hosts:
-          - grafana.${SECRET_DOMAIN}
+          - grafana.internal.${SECRET_DOMAIN}
         tls:
           - secretName: grafana-tls
             hosts:
-              - grafana.${SECRET_DOMAIN}
+              - grafana.internal.${SECRET_DOMAIN}
     prometheus:
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false

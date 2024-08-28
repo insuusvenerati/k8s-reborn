@@ -46,13 +46,14 @@ spec:
             envFrom:
               - secret: ta-creds
     service:
-      enabled: true
-      controller: main
-      ports:
-        http:
-          enabled: true
-          primary: true
-          port: 8000
+      main:
+        enabled: true
+        controller: main
+        ports:
+          http:
+            enabled: true
+            primary: true
+            port: 8000
     ingress:
       main:
         enabled: true
@@ -63,6 +64,9 @@ spec:
           - host: tubearchivist.internal.${SECRET_DOMAIN}
             paths:
               - path: /
+                service:
+                  name: main
+                  identifier: main
         tls:
           - secretName: tubearchivist-tls
             hosts:

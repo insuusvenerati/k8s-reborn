@@ -73,18 +73,10 @@ spec:
             enabled: true
             primary: true
             port: 8000
-      es:
-        enabled: true
-        controller: es
-        ports:
-          http:
+          es:
             enabled: true
             primary: true
             port: 9200
-      redis:
-        enabled: true
-        controller: redis
-        ports:
           redis:
             enabled: true
             primary: true

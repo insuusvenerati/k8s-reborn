@@ -45,7 +45,12 @@ spec:
                 value: http://elasticsearch:9200
             envFrom:
               - secret: ta-creds
-          es:
+      elasticsearch:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
+          elasticsearch:
             image:
               repository: bbilly1/tubearchivist-es
               tag: latest
@@ -60,6 +65,11 @@ spec:
                 value: "true"
             envFrom:
               - secret: ta-creds
+      redis:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
           redis:
             image:
               repository: redis/redis-stack-server
@@ -73,11 +83,19 @@ spec:
             enabled: true
             primary: true
             port: 8000
-          es:
+      elasticsearch:
+        enabled: true
+        controller: elasticsearch
+        ports:
+          http:
             enabled: true
             primary: true
             port: 9200
-          redis:
+      redis:
+        enabled: true
+        controller: redis
+        ports:
+          http:
             enabled: true
             primary: true
             port: 6379
@@ -113,15 +131,15 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         existingClaim: media-pvc-ssd
-      es:
+      elasticsearch:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         storageClass: nfs-client-ssd
         size: 10Gi
         advancedMounts:
-          main:
-            es:
+          elasticsearch:
+            elasticsearch:
               - path: "/usr/share/elasticsearch/data"
                 readOnly: false
       redis:
@@ -131,7 +149,7 @@ spec:
         storageClass: nfs-client-ssd
         size: 1Gi
         advancedMounts:
-          main:
+          redis:
             redis:
               - path: "/data"
                 readOnly: false

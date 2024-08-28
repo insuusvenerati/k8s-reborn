@@ -20,3 +20,4 @@ resources:
   # - ./ptero-ingress
   # - ./qbittorrent
   - ./nfs-subdir-external-ssd
+  - ./portainer

@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: portainer
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: portainer
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: portainer
+        namespace: flux-system
+  interval: 1h0m0s
+  releaseName: portainer
+  targetNamespace: default
+  values:
+    enterpriseEdition:
+      enable: true
+      image:
+        repository: portainer/portainer-ee
+        tag: 2.21.0
+        pullPolicy: Always
+    service:
+      type: ClusterIP
+    ingress:
+      enabled: true
+      ingressClassName: internal
+      hosts:
+        - host: &host portainer.internal.${SECRET_DOMAIN}
+          path: "/"
+      tls:
+        - secretName: portainer-tls
+          hosts: *host

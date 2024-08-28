@@ -17,3 +17,4 @@ resources:
   - ./nfs-subdir-external.yaml
   - ./hajimari.yaml
   - ./prometheus-community.yaml
+  - ./portainer.yaml

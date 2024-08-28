@@ -28,6 +28,8 @@ spec:
     ingress:
       enabled: true
       ingressClassName: internal
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
       hosts:
         - host: portainer.internal.${SECRET_DOMAIN}
           paths:

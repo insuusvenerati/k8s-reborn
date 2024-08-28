@@ -45,6 +45,25 @@ spec:
                 value: http://elasticsearch:9200
             envFrom:
               - secret: ta-creds
+          es:
+            image:
+              repository: bbilly1/tubearchivist-es
+              tag: latest
+            env:
+              - name: ES_JAVA_OPTS
+                value: -Xms512m -Xmx512m
+              - name: "discovery.type"
+                value: single-node
+              - name: "path.repo"
+                value: /usr/share/elasticsearch/data/snapshot
+              - name: "xpack.security.enabled"
+                value: "true"
+            envFrom:
+              - secret: ta-creds
+          redis:
+            image:
+              repository: redis/redis-stack-server
+              tag: latest
     service:
       main:
         enabled: true
@@ -54,6 +73,22 @@ spec:
             enabled: true
             primary: true
             port: 8000
+      es:
+        enabled: true
+        controller: es
+        ports:
+          http:
+            enabled: true
+            primary: true
+            port: 9200
+      redis:
+        enabled: true
+        controller: redis
+        ports:
+          redis:
+            enabled: true
+            primary: true
+            port: 6379
     ingress:
       main:
         enabled: true
@@ -86,3 +121,25 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         existingClaim: media-pvc-ssd
+      es:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: nfs-client-ssd
+        size: 10Gi
+        advancedMounts:
+          main:
+            es:
+              - path: "/usr/share/elasticsearch/data"
+                readOnly: false
+      redis:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: nfs-client-ssd
+        size: 1Gi
+        advancedMounts:
+          main:
+            redis:
+              - path: "/data"
+                readOnly: false

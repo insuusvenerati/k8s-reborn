@@ -77,18 +77,8 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         storageClass: nfs-client-ssd
-        globalMounts:
-          - path: /cache
-            readOnly: false
         size: 10Gi
       youtube:
         enabled: true
         type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        storageClass: nfs-client-ssd
         existingClaim: media-pvc-ssd
-        globalMounts:
-          - path: /youtube
-            readOnly: false
-        size: 100Gi
-        retain: true

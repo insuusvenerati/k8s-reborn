@@ -65,8 +65,8 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
                   identifier: main
+                  port: http
         tls:
           - secretName: tubearchivist-tls
             hosts:

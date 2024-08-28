@@ -40,9 +40,9 @@ spec:
               - name: TA_HOST
                 value: tubearchivist.internal.${SECRET_DOMAIN}
               - name: REDIS_HOST
-                value: redis
+                value: tubearchivist-redis
               - name: ES_URL
-                value: http://elasticsearch:9200
+                value: http://tubearchivist-elasticsearch:9200
             envFrom:
               - secret: ta-creds
       elasticsearch:

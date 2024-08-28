@@ -32,8 +32,8 @@ spec:
         - host: portainer.internal.${SECRET_DOMAIN}
           path: "/"
       tls:
-        - secretName: portainer-tls
-          hosts:
-            - host: portainer.internal.${SECRET_DOMAIN}
+        - hosts:
+            - portainer.internal.${SECRET_DOMAIN}
+          secretName: portainer-tls
     persistence:
       storageClass: openebs-hostpath

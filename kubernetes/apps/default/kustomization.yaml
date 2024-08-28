@@ -21,3 +21,4 @@ resources:
   # - ./qbittorrent
   - ./nfs-subdir-external-ssd
   - ./portainer
+  - ./tubearchivist

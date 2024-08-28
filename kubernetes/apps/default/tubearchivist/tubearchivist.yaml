@@ -1,0 +1,94 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tubearchivist
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: app-template
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  interval: 1h0m0s
+  releaseName: tubearchivist
+  targetNamespace: default
+  maxHistory: 2
+  values:
+    global:
+      fullnameOverride: tubearchivist
+    controllers:
+      main:
+        enabled: true
+        type: deployment
+        replicas: 1
+        containers:
+          main:
+            image:
+              repository: bbilly1/tubearchivist
+              tag: v0.4.10
+            env:
+              - name: TZ
+                value: America/Chicago
+              - name: PUID
+                value: "1000"
+              - name: PGID
+                value: "1000"
+              - name: TA_HOST
+                value: tubearchivist.internal.${SECRET_DOMAIN}
+              - name: REDIS_HOST
+                value: redis
+              - name: ES_URL
+                value: http://elasticsearch:9200
+            envFrom:
+              - secret: ta-creds
+    service:
+      enabled: true
+      controller: main
+      ports:
+        http:
+          enabled: true
+          primary: true
+          port: 8000
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-staging
+        hosts:
+          - host: tubearchivist.internal.${SECRET_DOMAIN}
+            paths:
+              - path: /
+        tls:
+          - secretName: tubearchivist-tls
+            hosts:
+              - tubearchivist.internal.${SECRET_DOMAIN}
+    # serviceMonitor:
+    #   main:
+    #     enabled: true
+    #     serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" $ }}'
+    persistence:
+      cache:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: nfs-client-ssd
+        globalMounts:
+          - path: /cache
+            readOnly: false
+        size: 10Gi
+      youtube:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: nfs-client-ssd
+        existingClaim: media-pvc-ssd
+        globalMounts:
+          - path: /youtube
+            readOnly: false
+        size: 100Gi
+        retain: true

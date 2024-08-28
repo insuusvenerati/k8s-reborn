@@ -30,7 +30,8 @@ spec:
       ingressClassName: internal
       hosts:
         - host: portainer.internal.${SECRET_DOMAIN}
-          path: "/"
+          paths:
+            - path: "/"
       tls:
         - hosts:
             - portainer.internal.${SECRET_DOMAIN}

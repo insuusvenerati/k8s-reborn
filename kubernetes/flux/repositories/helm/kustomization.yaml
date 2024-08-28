@@ -18,3 +18,4 @@ resources:
   - ./hajimari.yaml
   - ./prometheus-community.yaml
   - ./portainer.yaml
+  - ./grafana.yaml

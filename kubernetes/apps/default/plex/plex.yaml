@@ -21,9 +21,9 @@ spec:
       ALLOWED_NETWORKS: 192.168.1.0/24
       PLEX_GID: "1000"
       PLEX_UID: "1000"
-    extraVolumeMounts:
-      - mountPath: /media
-        name: media-pvc-ssd
+    # extraVolumeMounts:
+    #   - mountPath: /media
+    #     name: media-pvc-ssd
     extraVolumes: []
     fullnameOverride: "plex-media-server"
     image:
@@ -40,7 +40,7 @@ spec:
       ingressClassName: internal
       url: plex.internal.${SECRET_DOMAIN}
     pms:
-      configExistingClaim: ""
+      configExistingClaim: "media-pvc-ssd"
       configStorage: 2Gi
       resources: {}
       storageClassName: nfs-client-ssd

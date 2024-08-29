@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: plex-media-server
+  namespace: default
+spec:
+  chart:
+    spec:
+      chart: plex-media-server
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: plex
+        namespace: flux-system
+  interval: 1h0m0s
+  releaseName: plex-media-server
+  targetNamespace: default
+  values:
+    extraEnv:
+      ALLOWED_NETWORKS: 192.168.1.0/24
+      PLEX_GID: "1000"
+      PLEX_UID: "1000"
+    extraVolumeMounts:
+      - mountPath: /media
+        name: media-pvc-ssd
+    extraVolumes: []
+    fullnameOverride: "plex-media-server"
+    image:
+      pullPolicy: IfNotPresent
+      registry: index.docker.io
+      repository: plexinc/pms-docker
+      sha: ""
+      tag: latest
+    imagePullSecrets: []
+    ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-staging
+      enabled: true
+      ingressClassName: internal
+      url: plex.internal.${SECRET_DOMAIN}
+    pms:
+      configExistingClaim: ""
+      configStorage: 2Gi
+      resources: {}
+      storageClassName: nfs-client-ssd
+    service:
+      annotations: {}
+      port: 32400
+      type: ClusterIP
+    serviceAccount:
+      annotations: {}
+      automountServiceAccountToken: false
+      create: true
+      name: ""

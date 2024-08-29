@@ -19,3 +19,4 @@ resources:
   - ./prometheus-community.yaml
   - ./portainer.yaml
   - ./grafana.yaml
+  - ./plex.yaml

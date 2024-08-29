@@ -22,4 +22,4 @@ resources:
   - ./nfs-subdir-external-ssd
   - ./portainer
   - ./tubearchivist
-  - ./plex.yaml
+  - ./plex

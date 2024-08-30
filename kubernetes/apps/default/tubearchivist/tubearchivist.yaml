@@ -120,6 +120,12 @@ spec:
       main:
         enabled: true
         serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" $ }}'
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     persistence:
       cache:
         enabled: true

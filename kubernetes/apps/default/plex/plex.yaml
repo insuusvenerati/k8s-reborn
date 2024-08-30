@@ -21,6 +21,7 @@ spec:
       ALLOWED_NETWORKS: 192.168.1.0/24
       PLEX_GID: "1000"
       PLEX_UID: "1000"
+      PLEX_CLAIM: "claim-nwaQbqetDXyNWAN-dH8z"
     # extraVolumeMounts:
     #   - mountPath: /media
     #     name: media-pvc-ssd

@@ -116,10 +116,10 @@ spec:
           - secretName: tubearchivist-tls
             hosts:
               - tubearchivist.internal.${SECRET_DOMAIN}
-    # serviceMonitor:
-    #   main:
-    #     enabled: true
-    #     serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" $ }}'
+    serviceMonitor:
+      main:
+        enabled: true
+        serviceName: '{{ include "bjw-s.common.lib.chart.names.fullname" $ }}'
     persistence:
       cache:
         enabled: true
@@ -131,6 +131,9 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         existingClaim: media-pvc-ssd
+        globalMounts:
+          - path: /youtube
+            subPath: youtube
       elasticsearch:
         enabled: true
         type: persistentVolumeClaim

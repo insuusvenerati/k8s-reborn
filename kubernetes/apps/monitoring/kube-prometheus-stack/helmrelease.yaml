@@ -22,6 +22,8 @@ spec:
       ingress:
         enabled: true
         ingressClassName: internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - grafana.internal.${SECRET_DOMAIN}
         tls:

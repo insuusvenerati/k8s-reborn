@@ -36,7 +36,7 @@ spec:
     imagePullSecrets: []
     ingress:
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-staging
+        cert-manager.io/cluster-issuer: letsencrypt-production
       enabled: true
       ingressClassName: internal
       url: plex.internal.${SECRET_DOMAIN}

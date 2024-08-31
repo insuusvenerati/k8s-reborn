@@ -27,7 +27,7 @@ spec:
       PGID: 568
     image:
       repository: linuxserver/sonarr
-      tag: 4.0.8
+      tag: 4.0.9
     ingress:
       main:
         enabled: true

@@ -20,3 +20,4 @@ resources:
   - ./portainer.yaml
   - ./grafana.yaml
   - ./plex.yaml
+  - ./istio.yaml

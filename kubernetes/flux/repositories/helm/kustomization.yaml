@@ -21,3 +21,4 @@ resources:
   - ./grafana.yaml
   - ./plex.yaml
   - ./istio.yaml
+  - ./kiali.yaml

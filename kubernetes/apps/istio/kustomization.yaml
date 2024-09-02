@@ -5,3 +5,4 @@ resources:
   - ./istio.base.yaml
   - ./istio-d.yaml
   - ./istio-ingress.yaml
+  - ./kiali.yaml

@@ -33,6 +33,22 @@ spec:
       repository: plexinc/pms-docker
       sha: ""
       tag: latest
+    # initContainer:
+    #   image:
+    #     registry: index.docker.io
+    #     repository: alpine
+    #     # If unset use latest
+    #     tag: 3.18.0
+    #     sha: ""
+    #     pullPolicy: IfNotPresent
+    #   script: |-
+    #     #!/bin/sh
+    #     set -e
+    #     echo "Installing tubearchivist plex plugin"
+    #     apk add --no-cache wget
+    #     wget https://github.com/tubearchivist/tubearchivist-plex/archive/refs/heads/main.zip
+    #     unzip main.zip
+    #     mv tubearchivist-plex-main /config/Library/Application\ Support/Plex\ Media\ Server/Plug-ins/tubearchivist.bundle
     imagePullSecrets: []
     ingress:
       annotations:

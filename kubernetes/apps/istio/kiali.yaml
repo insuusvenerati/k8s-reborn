@@ -19,6 +19,9 @@ spec:
       ingress:
         class_name: internal
         override_yaml:
+          metadata:
+            name: kiali
+            namespace: istio-system
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-production
           spec:

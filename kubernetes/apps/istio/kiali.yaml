@@ -13,17 +13,20 @@ spec:
         kind: HelmRepository
         namespace: flux-system
   values:
+    server:
+      web_fqdn: kiali.internal.${SECRET_DOMAIN}
     auth:
       strategy: anonymous
     deployment:
       ingress:
+        enabled: true
         class_name: internal
         override_yaml:
           metadata:
             name: kiali
             namespace: istio-system
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-production
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt-production
           spec:
             rules:
               - host: kiali.internal.${SECRET_DOMAIN}

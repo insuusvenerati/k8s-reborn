@@ -44,7 +44,7 @@ spec:
             dependsOn: main
             image:
               repository: qmcgaw/gluetun
-              tag: v3.38.0
+              tag: v3.39.1
             # See [image docs](https://github.com/qdm12/gluetun-wiki) for more details on how to configure
             # your VPN and how to set up port-forwarding.
             env:

@@ -21,7 +21,7 @@ spec:
       enable: true
       image:
         repository: portainer/portainer-ee
-        tag: 2.21.0
+        tag: 2.22.0
         pullPolicy: Always
     service:
       type: ClusterIP

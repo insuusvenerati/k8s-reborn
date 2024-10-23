@@ -35,7 +35,7 @@ spec:
           main:
             image:
               repository: ghcr.io/onedr0p/qbittorrent-beta
-              tag: 4.6.4@sha256:d7620ef51467015e1cffab143d053a7dfbc2d7a6f50b3491427df7cd40cf16a9
+              tag: 5.0.0@sha256:042a856a25d130385bd57845646a75a2130dda4895c9be0306fcd7a62ed12801
             securityContext:
               runAsUser: 568
               runAsGroup: 568

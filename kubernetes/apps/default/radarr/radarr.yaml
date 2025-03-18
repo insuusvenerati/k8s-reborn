@@ -29,7 +29,7 @@ spec:
     image:
       repository: linuxserver/radarr
       pullPolicy: IfNotPresent
-      tag: 5.9.1
+      tag: 5.20.2
     ingress:
       main:
         enabled: true
